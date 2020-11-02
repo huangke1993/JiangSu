@@ -1,0 +1,33 @@
+﻿<Window x:Class="JiangSuPad.Window.TvWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        xmlns:cefSharpExtent="clr-namespace:JiangSuPad.CefSharpExtent"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:common="clr-namespace:UserControls.Common;assembly=UserControls"
+        xmlns:showTip="clr-namespace:UserControls.ShowTip;assembly=UserControls"
+        mc:Ignorable="d"
+        Title="TvWin" Height="1024" Width="1280" 
+        WindowStyle="None" ResizeMode="NoResize">
+    <Window.DataContext>
+        <Binding Path="TvWin" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Browser}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <cefSharpExtent:CefSharpOpenPageSelf x:Key="CefSharpOpenPageSelf"/>
+    </Window.Resources>
+    <common:AdornedControl IsAdornerVisible="{Binding IsLoading, ElementName=Browser}">
+        <common:AdornedControl.AdornerContent>
+            <showTip:Loading TextTip="加载中..."/>
+        </common:AdornedControl.AdornerContent>
+        <Grid>
+            <wpf:ChromiumWebBrowser Background="White"  Width="Auto" Height="Auto" LifeSpanHandler="{StaticResource CefSharpOpenPageSelf}" Address="{Binding Address}" x:Name="Browser"/>
+        </Grid>
+    </common:AdornedControl>
+</Window>
