@@ -29,7 +29,8 @@ namespace JiangSuPad.ViewModel
         }
         private void ShowHtmlPage()
         {
-            Address = _fileConfiguration.GetConfig<Configs>().TvUrl;
+            var config = _fileConfiguration.GetConfig<Configs>();
+            Address = $"{config.TvUrl}?mac={config.DeviceMac}";
         }
     }
 }

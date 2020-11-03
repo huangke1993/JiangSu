@@ -2,6 +2,7 @@
 {
     internal class Configs
     {
+        public string DeviceMac { get; set; }
         public DeviceType DeviceType { get; set; }
         public string PadUrl { get; set; }
         public string TvUrl { get; set; }

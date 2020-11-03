@@ -74,7 +74,8 @@ namespace JiangSuPad.ViewModel
 
         private void ShowHtmlPage()
         {
-            Address = _fileConfiguration.GetConfig<Configs>().PadUrl;
+            var config = _fileConfiguration.GetConfig<Configs>();
+            Address =$"{config.PadUrl}?mac={config.DeviceMac}";
         }
 
         private Timer _timer;
