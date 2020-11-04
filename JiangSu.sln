@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserControls", "UserControl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsCardReaderImpl", "TsCardReaderImpl\TsCardReaderImpl.csproj", "{F081E17E-B20D-44B8-93AE-35D463350758}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerInstall", "CustomerInstall\CustomerInstall.csproj", "{FA41113A-C984-4630-831B-F89A797D7701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{F081E17E-B20D-44B8-93AE-35D463350758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F081E17E-B20D-44B8-93AE-35D463350758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F081E17E-B20D-44B8-93AE-35D463350758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA41113A-C984-4630-831B-F89A797D7701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA41113A-C984-4630-831B-F89A797D7701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA41113A-C984-4630-831B-F89A797D7701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA41113A-C984-4630-831B-F89A797D7701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

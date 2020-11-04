@@ -47,6 +47,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
@@ -139,6 +142,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Icon.ico" />
+    <Resource Include="Icon\Icon.ico" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -217,4 +222,5 @@
   </Target>
   <Import Project="..\packages\CefSharp.Common.85.3.130\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.85.3.130\build\CefSharp.Common.targets')" />
   <Import Project="..\packages\CefSharp.Wpf.85.3.130\build\CefSharp.Wpf.targets" Condition="Exists('..\packages\CefSharp.Wpf.85.3.130\build\CefSharp.Wpf.targets')" />
+  <ProjectExtensions />
 </Project>

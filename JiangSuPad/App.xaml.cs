@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -82,6 +83,7 @@ namespace JiangSuPad
 
         private void DisplayWin(System.Windows.Window win,int screenIndex)
         {
+            if (Screen.AllScreens.ElementAtOrDefault(screenIndex) == null) return;
             var target = Screen.AllScreens[screenIndex];
             var targetWorkingArea = target.WorkingArea;
             win.Top = targetWorkingArea.Top;
