@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.IO;
+using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace CustomerInstall
@@ -17,12 +20,11 @@ namespace CustomerInstall
         }; 
         public override void Install(IDictionary stateSaver)
         {
-            var deviceMac = Context.Parameters["DeviceMac"];
             var padUrl = Context.Parameters["PadUrl"];
             var tvUrl = Context.Parameters["TvUrl"];
             var deviceType = _deviceType[Context.Parameters["DeviceType"]];
             var filePath= Context.Parameters["FilePath"];
-            WrictConfig(filePath,$"{{\"DeviceMac\":\"{deviceMac}\",\"PadUrl\":\"{padUrl}\",\"TvUrl\":\"{tvUrl}\",\"DeviceType\":{deviceType}}}");
+            WrictConfig(filePath,$"{{\"DeviceMac\":\"{GetMac()}\",\"PadUrl\":\"{padUrl}\",\"TvUrl\":\"{tvUrl}\",\"DeviceType\":{deviceType}}}");
             base.Install(stateSaver);
         }
 
@@ -33,6 +35,13 @@ namespace CustomerInstall
             {
                 fw.Write(contentBuffer,0, contentBuffer.Length);
             }
+        }
+        public static string GetMac()
+        {
+            var interfaces = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault();
+            return interfaces == null
+                ? string.Empty
+                : BitConverter.ToString(interfaces.GetPhysicalAddress().GetAddressBytes());
         }
     }
 }
