@@ -61,10 +61,18 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="TsDll\SSCardDriver.dll" />
-    <Content Include="TsDll\SSSE32_TSD.dll" />
-    <Content Include="TsDll\TECSUN.dll" />
-    <Content Include="TsDll\TSConfig.dll" />
+    <Content Include="TsDll\SSCardDriver.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TsDll\SSSE32_TSD.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TsDll\TECSUN.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TsDll\TSConfig.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Navigation;
@@ -67,7 +68,6 @@ namespace JiangSuPad
         private void OnlyOneProcessAction(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
         }
         private const int MainWinScreenIndex = 0;
 
@@ -85,9 +85,11 @@ namespace JiangSuPad
         {
             if (Screen.AllScreens.ElementAtOrDefault(screenIndex) == null) return;
             var target = Screen.AllScreens[screenIndex];
-            var targetWorkingArea = target.WorkingArea;
+            var targetWorkingArea = target.Bounds;
             win.Top = targetWorkingArea.Top;
             win.Left = targetWorkingArea.Left;
+            win.Width = targetWorkingArea.Width;
+            win.Height = targetWorkingArea.Height;
             win.Show();
         }
 
@@ -104,16 +106,17 @@ namespace JiangSuPad
 
         private ILogger _logger;
 
-        protected override void OnLoadCompleted(NavigationEventArgs e)
-        {
-            InitGloableException();
-        }
-
         private void InitGloableException()
         {
             _logger = ServiceLocator.Current.GetInstance<ILogger>();
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            HandleGlobleException(e.Exception);
         }
 
         private void Current_DispatcherUnhandledException(object sender,
@@ -140,6 +143,12 @@ namespace JiangSuPad
         {
             DisplayMainWin();
             DisPlayTvWin();
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            InitGloableException();
+            base.OnActivated(e);
         }
     }
 }

@@ -9,14 +9,14 @@
         xmlns:common="clr-namespace:UserControls.Common;assembly=UserControls"
         xmlns:showTip="clr-namespace:UserControls.ShowTip;assembly=UserControls"
         mc:Ignorable="d"
-        Title="TvWin" Height="1024" Width="1280" 
+        Title="TvWin"  
         WindowStyle="None" ResizeMode="NoResize">
     <Window.DataContext>
         <Binding Path="TvWin" Source="{StaticResource Locator}"/>
     </Window.DataContext>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Browser}"/>
+            <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>

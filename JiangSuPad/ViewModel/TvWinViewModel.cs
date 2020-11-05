@@ -11,7 +11,7 @@ namespace JiangSuPad.ViewModel
         public TvWinViewModel(IFileConfiguration fileConfiguration)
         {
             _fileConfiguration = fileConfiguration;
-            LoadCommand=new RelayCommand(ExcuteLoadCommand);
+            LoadCommand = new RelayCommand(ExcuteLoadCommand);
         }
         public RelayCommand LoadCommand { get; }
 
@@ -19,7 +19,6 @@ namespace JiangSuPad.ViewModel
         {
             ShowHtmlPage();
         }
-        
         private string _address;
 
         public string Address

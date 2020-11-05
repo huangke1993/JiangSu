@@ -27,7 +27,7 @@ namespace DkCardReaderImpl.Internal
         private const int SuccessCode = 0;
         public static IMessage<IPersonInfo> ReadIdCard()
         {
-            var info = new StringBuilder(1024);
+            var info = new StringBuilder(1024*10);
             var notGetFingerDataLength = 0;
             var ret = DkPInvoke.ReadIdCard(ref notGetFingerDataLength, new StringBuilder(1024), info);
             return ret == SuccessCode
@@ -36,7 +36,7 @@ namespace DkCardReaderImpl.Internal
         }
         public static IMessage<IPersonInfo> ReadSocialCard(CardType cardType)
         {
-            var info = new StringBuilder(1024);
+            var info = new StringBuilder(1024*10);
             var ret = DkPInvoke.ReadCardBas((int)cardType, info);
             return ret == SuccessCode
                 ? CommonDeviceMsg<DkPersonInfo>.CreateSuccess(DkPersonInfo.CreateBySocialResult(info.ToString()))
@@ -59,7 +59,7 @@ namespace DkCardReaderImpl.Internal
         }
         public static DkPersonInfo CreateByIdResult(string data)
         {
-            var dataArrary = data.Trim('|').Split('|');
+            var dataArrary = data.Split('|');
             return GetInfoById[dataArrary[0]](dataArrary.Skip(1).ToArray());
         }
 

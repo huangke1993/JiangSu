@@ -9,7 +9,7 @@
         xmlns:showTip="clr-namespace:UserControls.ShowTip;assembly=UserControls"
         xmlns:common="clr-namespace:UserControls.Common;assembly=UserControls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1280"  
+        Title="MainWindow"
         WindowStyle="None" ResizeMode="NoResize">
     <Window.DataContext>
         <Binding Path="PadWin" Source="{StaticResource Locator}"/>

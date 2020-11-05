@@ -31,7 +31,6 @@ namespace JiangSuPad.ViewModel
             LoadCommand = new RelayCommand<ChromiumWebBrowser>(ExcuteLoadCommand);
             UnLoadCommand = new RelayCommand(ExcuteUnLoadCommand);
         }
-
         public RelayCommand UnLoadCommand { get; }
 
         private void ExcuteUnLoadCommand()
@@ -47,7 +46,6 @@ namespace JiangSuPad.ViewModel
             InitBrowser(browser);
             ShowHtmlPage();
             AddObserver();
-            EveryFiveSecondToReadCard();
         }
 
         private void AddObserver()
@@ -62,6 +60,12 @@ namespace JiangSuPad.ViewModel
         private void InitBrowser(ChromiumWebBrowser browser)
         {
             _browser = browser;
+            _browser.LoadingStateChanged += _browser_LoadingStateChanged;
+        }
+        private void _browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
+        {
+            if (e.IsLoading) return;
+            EveryFiveSecondToReadCard();
         }
 
         private string _address;
@@ -71,7 +75,6 @@ namespace JiangSuPad.ViewModel
             get => _address;
             set { _address = value;RaisePropertyChanged(); }
         }
-
         private void ShowHtmlPage()
         {
             var config = _fileConfiguration.GetConfig<Configs>();
@@ -81,6 +84,7 @@ namespace JiangSuPad.ViewModel
         private Timer _timer;
         private void EveryFiveSecondToReadCard()
         {
+            if (_timer != null) return;
             _timer=new Timer(TimerCallback,null,5000,Timeout.Infinite);
         }
 
