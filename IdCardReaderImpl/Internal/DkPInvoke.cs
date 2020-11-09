@@ -12,7 +12,7 @@ namespace DkCardReaderImpl.Internal
 {
     internal class DkPInvoke
     {
-        private const string DllFile = @"DkDll\\SSCardDriver.dll";
+        private const string DllFile = @"DkDll\SSCardDriver.dll";
 
         [DllImport(DllFile, EntryPoint = "iReadIdentityCard", CharSet = CharSet.Ansi, SetLastError = false,
             CallingConvention = CallingConvention.StdCall)]

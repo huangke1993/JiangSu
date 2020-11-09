@@ -11,7 +11,7 @@ namespace TsCardReaderImpl.Internal
 {
     internal class TsPinvoke
     {
-        private const string DllFile = @"TsDll\\SSCardDriver.dll";
+        private const string DllFile = @"TsDll\SSCardDriver.dll";
 
         [DllImport(DllFile, EntryPoint = "iReadCertInfo", CharSet = CharSet.Ansi, SetLastError = false,
             CallingConvention = CallingConvention.StdCall)]

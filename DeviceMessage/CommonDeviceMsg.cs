@@ -13,7 +13,7 @@ namespace DeviceMessage
         {
             return new CommonDeviceMsg(true,string.Empty);
         }
-        public static IMessage CreateFail(int resultCode, string errorMessage)
+        public static IMessage CreateFail(string errorMessage)
         {
             return new CommonDeviceMsg(false, errorMessage);
         }
@@ -36,7 +36,7 @@ namespace DeviceMessage
             return new CommonDeviceMsg<T>(true, data, string.Empty);
         }
 
-        public static IMessage<T> CreateFail(string errorMessage)
+        public new static IMessage<T> CreateFail(string errorMessage)
         {
             return new CommonDeviceMsg<T>(false, default, errorMessage);
         }

@@ -179,6 +179,10 @@
       <Project>{EAA73369-4391-4045-B390-AF4D58054086}</Project>
       <Name>FileConfigurationInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HsCardReaderImpl\HsCardReaderImpl.csproj">
+      <Project>{E2C9569E-0BB2-4729-BE5B-423BF68BB4D2}</Project>
+      <Name>HsCardReaderImpl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IdCardReaderDeclare\ICardReaderDeclare.csproj">
       <Project>{84714139-261C-4D4B-A06E-D3A9BA0DB491}</Project>
       <Name>ICardReaderDeclare</Name>

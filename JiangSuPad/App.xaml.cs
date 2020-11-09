@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Navigation;
 using CefSharp;
 using CefSharp.Wpf;
 using CommonServiceLocator;

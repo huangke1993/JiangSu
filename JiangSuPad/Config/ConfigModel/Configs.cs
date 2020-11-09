@@ -11,6 +11,7 @@
     internal enum DeviceType
     {
         Ts=0,
-        Dk=1
+        Dk=1,
+        Hs=2
     }
 }
