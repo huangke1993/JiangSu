@@ -51,7 +51,7 @@ namespace HsCardReaderImpl
             for (var port = MinComNum; port < MaxComNum; port++)
             {
                 var result = HsReaderInternal.OpenReader(port);
-                if (result.IsSuccess) break;
+                if (result.IsSuccess) return result;
             }
             return HsReaderInternal.OpenReader(MaxComNum);
         }
@@ -62,7 +62,7 @@ namespace HsCardReaderImpl
             for (var usb = MinUsbNum; usb < MaxUsbNum; usb++)
             {
                 var result = HsReaderInternal.OpenReader(usb);
-                if (result.IsSuccess) break;
+                if (result.IsSuccess) return result;
             }
             return HsReaderInternal.OpenReader(MaxUsbNum);
         }

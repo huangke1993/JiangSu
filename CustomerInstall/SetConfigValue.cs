@@ -16,7 +16,8 @@ namespace CustomerInstall
         private readonly IDictionary<string,int>_deviceType=new Dictionary<string, int>()
         {
             { "德生 TSW-M21D",0},
-            { "德卡T10",1}
+            { "德卡T10",1},
+            { "华视CVR -100U",2}
         }; 
         public override void Install(IDictionary stateSaver)
         {
