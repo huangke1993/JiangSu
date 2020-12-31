@@ -73,6 +73,9 @@
     <Compile Include="Common\AdornedControl.cs" />
     <Compile Include="Common\AdornerPlacement.cs" />
     <Compile Include="Common\FrameworkElementAdorner.cs" />
+    <Compile Include="ShowTip\ErrorWin.xaml.cs">
+      <DependentUpon>ErrorWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShowTip\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ShowTip\ErrorWin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ShowTip\Loading.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,6 +103,10 @@
       <Project>{AC68DFE8-91A7-4A28-9F81-3B22FE76E4DA}</Project>
       <Name>CustomizeControls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\Image\提示.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

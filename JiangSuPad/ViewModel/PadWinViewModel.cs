@@ -1,4 +1,9 @@
+using System;
+using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 using CefSharp;
 using CefSharp.Wpf;
 using ConmonMessage;
@@ -30,6 +35,7 @@ namespace JiangSuPad.ViewModel
             _parameterPass = parameterPass;
             LoadCommand = new RelayCommand<ChromiumWebBrowser>(ExcuteLoadCommand);
             UnLoadCommand = new RelayCommand(ExcuteUnLoadCommand);
+            CloseCommand = new RelayCommand(ExcuteCloseCommand);
         }
         public RelayCommand UnLoadCommand { get; }
 
@@ -41,13 +47,29 @@ namespace JiangSuPad.ViewModel
         private ChromiumWebBrowser _browser;
         public RelayCommand<ChromiumWebBrowser> LoadCommand { get; }
 
-        private void ExcuteLoadCommand(ChromiumWebBrowser browser)
+        private async void ExcuteLoadCommand(ChromiumWebBrowser browser)
         {
+            await InitMac();
             InitBrowser(browser);
             ShowHtmlPage();
             AddObserver();
         }
 
+        private async Task InitMac()
+        {
+            var config = _fileConfiguration.GetConfig<Configs>();
+            if (!string.IsNullOrEmpty(config.DeviceMac)) return;
+            config.DeviceMac = GetMac();
+            await _fileConfiguration.SetConfigurationInFileAsync(config);
+        }
+
+        private string GetMac()
+        {
+            var interfaces = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault();
+            return interfaces == null
+                ? string.Empty
+                : BitConverter.ToString(interfaces.GetPhysicalAddress().GetAddressBytes());
+        }
         private void AddObserver()
         {
             _parameterPass.AddObserveByKey(CardDataKey, key =>
@@ -61,7 +83,30 @@ namespace JiangSuPad.ViewModel
         {
             _browser = browser;
             _browser.LoadingStateChanged += _browser_LoadingStateChanged;
+            _browser.LoadError += _browser_LoadError;
         }
+
+        private int _errorCount;
+        private const int MaxErrorCount = 10;
+        private bool _isShowErrorMsg;
+        public bool IsShowErrorMsg
+        {
+            get => _isShowErrorMsg;
+            set { _isShowErrorMsg = value;RaisePropertyChanged(); }
+        }
+
+        private void _browser_LoadError(object sender, LoadErrorEventArgs e)
+        {
+            _errorCount++;
+            if (_errorCount >= MaxErrorCount)
+            {
+                IsShowErrorMsg = true;
+                return;
+            }
+            Thread.Sleep(5000);
+            _browser.Reload();
+        }
+
         private void _browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
         {
             if (e.IsLoading) return;
@@ -114,6 +159,12 @@ namespace JiangSuPad.ViewModel
             }
             _logger.WriteInfoLog(result.Message);
             return false;
+        }
+        public RelayCommand CloseCommand { get; }
+
+        private void ExcuteCloseCommand()
+        {
+            Application.Current.Shutdown();
         }
     }
 }

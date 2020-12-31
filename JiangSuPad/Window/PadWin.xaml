@@ -25,7 +25,17 @@
             <i:InvokeCommandAction Command="{Binding UnLoadCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <common:AdornedControl IsAdornerVisible="{Binding IsLoading, ElementName=Browser}">
+    <common:AdornedControl IsAdornerVisible="{Binding IsShowErrorMsg,Mode=TwoWay}">
+        <common:AdornedControl.AdornerContent>
+            <showTip:ErrorWin TextTip="无法连接到页面，请检查网络或地址后重试！">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SureClick">
+                        <i:InvokeCommandAction Command="{Binding CloseCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </showTip:ErrorWin>
+        </common:AdornedControl.AdornerContent>
+        <common:AdornedControl IsAdornerVisible="{Binding IsLoading, ElementName=Browser}">
         <common:AdornedControl.AdornerContent>
             <showTip:Loading TextTip="加载中..."/>
         </common:AdornedControl.AdornerContent>
@@ -34,4 +44,5 @@
             </wpf:ChromiumWebBrowser>
         </Grid>
     </common:AdornedControl>
+        </common:AdornedControl>
 </Window>

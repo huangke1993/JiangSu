@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.IO;
-using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text;
 
 namespace CustomerInstall
@@ -17,7 +14,7 @@ namespace CustomerInstall
         {
             { "德生 TSW-M21D",0},
             { "德卡T10",1},
-            { "华视CVR -100U",2}
+            { "华视CVR-100U",2}
         }; 
         public override void Install(IDictionary stateSaver)
         {
@@ -25,7 +22,7 @@ namespace CustomerInstall
             var tvUrl = Context.Parameters["TvUrl"];
             var deviceType = _deviceType[Context.Parameters["DeviceType"]];
             var filePath= Context.Parameters["FilePath"];
-            WrictConfig(filePath,$"{{\"DeviceMac\":\"{GetMac()}\",\"PadUrl\":\"{padUrl}\",\"TvUrl\":\"{tvUrl}\",\"DeviceType\":{deviceType}}}");
+            WrictConfig(filePath,$"{{\"PadUrl\":\"{padUrl}\",\"TvUrl\":\"{tvUrl}\",\"DeviceType\":{deviceType}}}");
             base.Install(stateSaver);
         }
 
@@ -36,13 +33,6 @@ namespace CustomerInstall
             {
                 fw.Write(contentBuffer,0, contentBuffer.Length);
             }
-        }
-        public static string GetMac()
-        {
-            var interfaces = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault();
-            return interfaces == null
-                ? string.Empty
-                : BitConverter.ToString(interfaces.GetPhysicalAddress().GetAddressBytes());
         }
     }
 }

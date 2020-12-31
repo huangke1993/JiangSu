@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,14 +43,15 @@ namespace JiangSuPad
 
             return null;
         }
-
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private void SetCefSharp()
         {
             var settings = new CefSettings
             {
                 Locale = "zh-CN",
-                BrowserSubprocessPath =
-                    Path.Combine(Environment.CurrentDirectory, @"x86\CefSharp.BrowserSubprocess.exe")
+                BrowserSubprocessPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,
+                    Environment.Is64BitProcess ? "x64" : "x86",
+                    "CefSharp.BrowserSubprocess.exe")
             };
             Cef.Initialize(settings, false, browserProcessHandler: null);
         }
