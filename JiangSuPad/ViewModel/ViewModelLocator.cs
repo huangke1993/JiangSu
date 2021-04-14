@@ -74,7 +74,6 @@ namespace JiangSuPad.ViewModel
             if (deviceType == DeviceType.Hx)
             {
                 container.RegisterType<ICardReader, HxCardReader>();
-                return;
             }
         }
 
