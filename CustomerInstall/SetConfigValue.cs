@@ -14,7 +14,8 @@ namespace CustomerInstall
         {
             { "德生 TSW-M21D",0},
             { "德卡T10",1},
-            { "华视CVR-100U",2}
+            { "华视CVR-100U",2},
+            { "华旭",3}
         }; 
         public override void Install(IDictionary stateSaver)
         {

@@ -4,6 +4,7 @@ using DefaultParameterPass;
 using DkCardReaderImpl;
 using FileConfigurationInterface;
 using HsCardReaderImpl;
+using HxCardReaderImpl;
 using ICardReaderDeclare;
 using JiangSuPad.Config.ConfigModel;
 using JsonFileConfiguration;
@@ -68,6 +69,11 @@ namespace JiangSuPad.ViewModel
             if (deviceType == DeviceType.Hs)
             {
                 container.RegisterType<ICardReader, HsCardReader>();
+                return;
+            }
+            if (deviceType == DeviceType.Hx)
+            {
+                container.RegisterType<ICardReader, HxCardReader>();
                 return;
             }
         }

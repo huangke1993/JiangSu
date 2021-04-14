@@ -42,4 +42,11 @@ namespace DeviceMessage
         }
         public T Data { get; }
     }
+    public static class MessageExtent
+    {
+        public static IMessage<T> FailToMessageT<T>(this IMessage message)
+        {
+            return CommonDeviceMsg<T>.CreateFail(message.Message);
+        }
+    }
 }

@@ -1,15 +1,16 @@
-﻿using ICardReaderDeclare;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ConmonMessage;
 using DeviceMessage;
-using HsCardReaderImpl.Internal;
+using HxCardReaderImpl.Internal;
+using ICardReaderDeclare;
 using ICardReaderDeclare.Enum;
 
-namespace HsCardReaderImpl
+namespace HxCardReaderImpl
 {
-    public class HsCardReader : ICardReader
+    public class HxCardReader : ICardReader
     {
         private readonly object _lock = new object();
+
         public Task<IMessage<IPersonInfo>> ReadIdCardAsync()
         {
             return Task.Run(
@@ -29,43 +30,59 @@ namespace HsCardReaderImpl
 
         private IMessage<IPersonInfo> ReadCard()
         {
-            return HsReaderInternal.ReadCard();
+            return HxReaderInternal.ReadCard(_port);
         }
 
         private void CloseReader()
         {
-            HsReaderInternal.CloseReader();
+            HxReaderInternal.CloseReader(_port);
         }
+
+        private int _port;
 
         private IMessage OpenReader()
         {
-            var comOpenResult = OpenReaderByCom();
+            var comOpenResult = OpenReaderByUsb();
             if (comOpenResult.IsSuccess) return comOpenResult;
-            return OpenReaderByUsb();
+            return OpenReaderByCom();
         }
 
-        private const int MinComNum = 1001;
-        private const int MaxComNum = 1016;
+        private const int MinComNum = 1;
+        private const int MaxComNum = 16;
+
         private IMessage OpenReaderByCom()
         {
             for (var port = MinComNum; port < MaxComNum; port++)
             {
-                var result = HsReaderInternal.OpenReader(port);
-                if (result.IsSuccess) return result;
+                var result = HxReaderInternal.OpenReader(port);
+                if (result.IsSuccess)
+                {
+                    _port = port;
+                    return result;
+                }
             }
-            return HsReaderInternal.OpenReader(MaxComNum);
+
+            return HxReaderInternal.OpenReader(MaxComNum);
         }
-        private const int MinUsbNum = 1;
-        private const int MaxUsbNum = 4;
+
+        private const int MinUsbNum = 1001;
+        private const int MaxUsbNum = 1016;
+
         private IMessage OpenReaderByUsb()
         {
             for (var usb = MinUsbNum; usb < MaxUsbNum; usb++)
             {
-                var result = HsReaderInternal.OpenReader(usb);
-                if (result.IsSuccess) return result;
+                var result = HxReaderInternal.OpenReader(usb);
+                if (result.IsSuccess)
+                {
+                    _port = usb;
+                    return result;
+                }
             }
-            return HsReaderInternal.OpenReader(MaxUsbNum);
+
+            return HxReaderInternal.OpenReader(MaxUsbNum);
         }
+
         public Task<IMessage<IPersonInfo>> ReadSocialCardAsync(CardType cardType)
         {
             return Task.Run(
