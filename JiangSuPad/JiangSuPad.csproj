@@ -105,12 +105,24 @@
     </ApplicationDefinition>
     <Compile Include="CefSharpExtent\CefSharpOpenPageSelf.cs" />
     <Compile Include="Config\ConfigModel\Configs.cs" />
+    <Compile Include="Converter\BoolNegateCvt.cs" />
+    <Compile Include="Converter\VerifyMulCvt.cs" />
+    <Compile Include="Validation\IdNumValidation.cs" />
+    <Compile Include="Validation\RequiredValidation.cs" />
+    <Compile Include="ViewModel\InputWinViewModel.cs" />
     <Compile Include="ViewModel\PadWinViewModel.cs" />
     <Compile Include="ViewModel\TvWinViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Window\InputWin.xaml.cs">
+      <DependentUpon>InputWin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window\TvWin.xaml.cs">
       <DependentUpon>TvWin.xaml</DependentUpon>
     </Compile>
+    <Page Include="Window\InputWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Window\PadWin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

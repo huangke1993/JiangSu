@@ -6,44 +6,39 @@ using System.Threading.Tasks;
 using System.Windows;
 using CefSharp;
 using CefSharp.Wpf;
-using ConmonMessage;
 using FileConfigurationInterface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using ICardReaderDeclare;
-using ICardReaderDeclare.Enum;
 using JiangSuPad.Config.ConfigModel;
+using JiangSuPad.Window;
 using LoggerDeclare;
 using ParameterDeclare;
-using Timer = System.Threading.Timer;
 
 namespace JiangSuPad.ViewModel
 {
     public class PadWinViewModel : ViewModelBase
     {
-        private readonly ICardReader _cardReader;
-        private readonly ILogger _logger;
         private readonly IFileConfiguration _fileConfiguration;
         private readonly IParameterPass _parameterPass;
+        private readonly ILogger _logger;
 
-        public PadWinViewModel(ICardReader cardReader, ILogger logger, IFileConfiguration fileConfiguration,
+        public PadWinViewModel(ILogger logger,IFileConfiguration fileConfiguration,
             IParameterPass parameterPass)
         {
-            _cardReader = cardReader;
             _logger = logger;
             _fileConfiguration = fileConfiguration;
             _parameterPass = parameterPass;
             LoadCommand = new RelayCommand<ChromiumWebBrowser>(ExcuteLoadCommand);
-            UnLoadCommand = new RelayCommand(ExcuteUnLoadCommand);
             CloseCommand = new RelayCommand(ExcuteCloseCommand);
+            OpenWinCommand = new RelayCommand(ExcuteOpenWinCommand);
         }
-        public RelayCommand UnLoadCommand { get; }
+        public RelayCommand OpenWinCommand { get; }
 
-        private void ExcuteUnLoadCommand()
+        private void ExcuteOpenWinCommand()
         {
-            _timer.Dispose();
+            var inputWin = new InputWin();
+            inputWin.ShowDialog();
         }
-
         private ChromiumWebBrowser _browser;
         public RelayCommand<ChromiumWebBrowser> LoadCommand { get; }
 
@@ -74,15 +69,15 @@ namespace JiangSuPad.ViewModel
         {
             _parameterPass.AddObserveByKey(CardDataKey, key =>
             {
-                var data = _parameterPass.GetDataByKey<IPersonInfo>(key);
-                _browser.ExecuteScriptAsync($"readBack('{data.Name}|{data.IdNum}')");
+                var data = _parameterPass.GetDataByKey<string>(key);
+                _browser.ExecuteScriptAsync($"readBack('{data}')");
+                _logger.WriteInfoLog(data);
             });
         }
 
         private void InitBrowser(ChromiumWebBrowser browser)
         {
             _browser = browser;
-            _browser.LoadingStateChanged += _browser_LoadingStateChanged;
             _browser.LoadError += _browser_LoadError;
         }
 
@@ -107,12 +102,6 @@ namespace JiangSuPad.ViewModel
             _browser.Reload();
         }
 
-        private void _browser_LoadingStateChanged(object sender, LoadingStateChangedEventArgs e)
-        {
-            if (e.IsLoading) return;
-            EveryFiveSecondToReadCard();
-        }
-
         private string _address;
 
         public string Address
@@ -126,40 +115,7 @@ namespace JiangSuPad.ViewModel
             Address =$"{config.PadUrl}?mac={config.DeviceMac}";
         }
 
-        private Timer _timer;
-        private void EveryFiveSecondToReadCard()
-        {
-            if (_timer != null) return;
-            _timer=new Timer(TimerCallback,null,5000,Timeout.Infinite);
-        }
-
-        private void TimerCallback(object state)
-        {
-            ReadIdCard();
-            _timer.Change(5000, Timeout.Infinite);
-        }
-
         private const int CardDataKey = 10;
-
-        private void ReadIdCard()
-        {
-            var idData = _cardReader.ReadIdCardAsync().Result;
-            if (DealResult(idData)) return;
-            var socialData = _cardReader.ReadSocialCardAsync(CardType.Contact).Result;
-            DealResult(socialData);
-        }
-
-        private bool DealResult(IMessage<IPersonInfo> result)
-        {
-            if (result.IsSuccess)
-            {
-                _logger.WriteInfoLog(result.Data.ToString());
-                _parameterPass.AddOrUpdateStepData(CardDataKey, result.Data);
-                return true;
-            }
-            _logger.WriteInfoLog(result.Message);
-            return false;
-        }
         public RelayCommand CloseCommand { get; }
 
         private void ExcuteCloseCommand()

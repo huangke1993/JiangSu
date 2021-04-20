@@ -57,6 +57,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button\LevButton.xaml.cs">
+      <DependentUpon>LevButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,7 @@
     <Compile Include="ShowTip\Loading.xaml.cs">
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextBox\TextBoxNoAutoKeyboard.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -89,6 +93,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Button\LevButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ShowTip\ErrorWin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

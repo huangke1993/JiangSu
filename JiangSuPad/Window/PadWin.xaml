@@ -8,9 +8,13 @@
         xmlns:cefSharpExtent="clr-namespace:JiangSuPad.CefSharpExtent"
         xmlns:showTip="clr-namespace:UserControls.ShowTip;assembly=UserControls"
         xmlns:common="clr-namespace:UserControls.Common;assembly=UserControls"
+        xmlns:button="clr-namespace:UserControls.Button;assembly=UserControls"
         mc:Ignorable="d"
         Title="MainWindow"
         WindowStyle="None" ResizeMode="NoResize">
+    <Window.InputBindings>
+        <KeyBinding Gesture="Control+Alt+Q" Command="{Binding OpenWinCommand}" />
+    </Window.InputBindings>
     <Window.DataContext>
         <Binding Path="PadWin" Source="{StaticResource Locator}"/>
     </Window.DataContext>
@@ -20,9 +24,6 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCommand}" CommandParameter="{Binding ElementName=Browser}"/>
-        </i:EventTrigger>
-        <i:EventTrigger EventName="Unloaded">
-            <i:InvokeCommandAction Command="{Binding UnLoadCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <common:AdornedControl IsAdornerVisible="{Binding IsShowErrorMsg,Mode=TwoWay}">
@@ -42,6 +43,13 @@
         <Grid>
             <wpf:ChromiumWebBrowser Background="White"  Width="Auto" Height="Auto" LifeSpanHandler="{StaticResource CefSharpOpenPageSelf}" x:Name="Browser" Address="{Binding Address}">
             </wpf:ChromiumWebBrowser>
+                <button:LevButton>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="ClickClick">
+                            <i:InvokeCommandAction Command="{Binding OpenWinCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </button:LevButton>
         </Grid>
     </common:AdornedControl>
         </common:AdornedControl>

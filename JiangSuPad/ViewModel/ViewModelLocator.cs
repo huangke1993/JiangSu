@@ -42,8 +42,9 @@ namespace JiangSuPad.ViewModel
         }
         private static void RegisterViewModel(IUnityContainer container)
         {
-            container.RegisterType<PadWinViewModel>();
+            container.RegisterType<PadWinViewModel>(); 
             container.RegisterType<TvWinViewModel>();
+            container.RegisterType<InputWinViewModel>();
         }
 
         private static void RegisterAssembly(IUnityContainer container, IFileConfiguration fileConfiguration)
@@ -79,7 +80,8 @@ namespace JiangSuPad.ViewModel
 
         public PadWinViewModel PadWin=> ServiceLocator.Current.GetInstance<PadWinViewModel>();
         public TvWinViewModel TvWin => ServiceLocator.Current.GetInstance<TvWinViewModel>();
-        
+        public InputWinViewModel InputWin => ServiceLocator.Current.GetInstance<InputWinViewModel>();
+
         public static void Cleanup()
         {
         }
