@@ -37,6 +37,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Ink, Version=1.7.2600.2180, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\JiLinCardMachine\Controls\Dll\Microsoft.Ink.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -57,8 +61,36 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button\BusinessButton.cs" />
     <Compile Include="Button\LevButton.xaml.cs">
       <DependentUpon>LevButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\HandInput\HandWrite.xaml.cs">
+      <DependentUpon>HandWrite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\InputCommon.cs" />
+    <Compile Include="Input\InputType.cs" />
+    <Compile Include="Input\InputTypeSelect.xaml.cs">
+      <DependentUpon>InputTypeSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\CharacterButton.xaml.cs">
+      <DependentUpon>CharacterButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\Keyboard.xaml.cs">
+      <DependentUpon>Keyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\KeyButton.xaml.cs">
+      <DependentUpon>KeyButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\One.xaml.cs">
+      <DependentUpon>One.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\StyleButton.xaml.cs">
+      <DependentUpon>StyleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Input\KeyBoard\ZPoint.cs" />
+    <Compile Include="Input\NumInput\NumInput.xaml.cs">
+      <DependentUpon>NumInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -91,11 +123,48 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="Resource\ChineseData\WpfControlLibrary.data" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Button\LevButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Input\HandInput\HandWrite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\InputTypeSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\KeyBoard\CharacterButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\KeyBoard\Keyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\KeyBoard\KeyButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\KeyBoard\One.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\KeyBoard\StyleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Input\NumInput\NumInput.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resource\Style\NormalButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ShowTip\ErrorWin.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -107,12 +176,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomizeControls\CustomizeControls.csproj">
-      <Project>{AC68DFE8-91A7-4A28-9F81-3B22FE76E4DA}</Project>
-      <Name>CustomizeControls</Name>
-    </ProjectReference>
+    <Content Include="Dll\Microsoft.Ink.dll" />
+    <Content Include="Dll\tools.dll" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resource\Image\提示.png" />
   </ItemGroup>

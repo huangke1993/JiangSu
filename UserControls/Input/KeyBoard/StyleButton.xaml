@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="UserControls.Input.KeyBoard.StyleButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             Name="self"
+             Tag="StyleButton"
+             d:DesignHeight="50" d:DesignWidth="200">
+    <Grid PreviewMouseDown="Grid_PreviewMouseDown">
+        <Border BorderBrush="#E1E5E6" Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl},Path=Background}" BorderThickness="2"></Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontWeight="Bold" Foreground="Black" Name="style1" Text="{Binding ElementName=self, Path=Text1}"/>
+            <TextBlock>/</TextBlock>
+            <TextBlock Name="style2" Foreground="Gray" Text="{Binding ElementName=self, Path=Text2}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

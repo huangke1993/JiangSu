@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="UserControls.Input.KeyBoard.Keyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:keyBoard1="clr-namespace:UserControls.Input.KeyBoard"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="keyBoard1:KeyButton">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Style.Triggers>
+                <!--<EventTrigger RoutedEvent="MouseDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard >
+                              
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0478BB"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="keyBoard1:CharacterButton">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="1"/>
+            <Style.Triggers>
+                <!--<EventTrigger RoutedEvent="MouseDown">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard >
+                              
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>-->
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0478BB"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="50"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0478BB"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="keyBoard1:StyleButton">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#0478BB"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Border BorderBrush="#E1E5E6" BorderThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid>
+                    <StackPanel Orientation="Horizontal"  Background="#F9F9FF" HorizontalAlignment="Left">
+                        <keyBoard1:KeyButton x:Name="lastPage" PreviewMouseDown="LastPage_PreviewMouseDown" Text="上一页" Height="35"/>
+                        <StackPanel Name="sp1" Orientation="Horizontal" Height="50" Width="600" PreviewMouseDown="Sp1_PreviewMouseDown">
+                            <keyBoard1:One Num="1" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="2" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="3" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="4" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="5" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="6" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="7" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="8" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="9" Z="锕" Margin="5,0,5,0"/>
+                            <keyBoard1:One Num="0" Z="锕" Margin="5,0,5,0"/>
+                        </StackPanel>
+                        <keyBoard1:KeyButton x:Name="nextPage" PreviewMouseDown="NextPage_PreviewMouseDown" Text="下一页" Height="35"/>
+                        <TextBlock Name="pinyin" Width="69" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" Margin="3,0,0,0"></TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <WrapPanel Name="wp" Width="780" PreviewMouseDown="WrapPanel_PreviewMouseDown">
+                <keyBoard1:CharacterButton Text1="`" Text2="~"/>
+                <keyBoard1:CharacterButton Text1="1" Text2="!"/>
+                <keyBoard1:CharacterButton Text1="2" Text2="@"/>
+                <keyBoard1:CharacterButton Text1="3" Text2="#"/>
+                <keyBoard1:CharacterButton Text1="4" Text2="$"/>
+                <keyBoard1:CharacterButton Text1="5" Text2="%"/>
+                <keyBoard1:CharacterButton Text1="6" Text2="^"/>
+                <keyBoard1:CharacterButton Text1="7" Text2="&amp;"/>
+                <keyBoard1:CharacterButton Text1="8" Text2="*"/>
+                <keyBoard1:CharacterButton Text1="9" Text2="("/>
+                <keyBoard1:CharacterButton Text1="0" Text2=")"/>
+                <keyBoard1:CharacterButton Text1="_" Text2="-"/>
+                <keyBoard1:CharacterButton Text1="+" Text2="="/>
+                <keyBoard1:KeyButton Text="删除" Width="102"/>
+                <keyBoard1:StyleButton Margin="1,0,0,0" Width="80" Height="50" Text1="中文" Text2="英文"/>
+                <keyBoard1:KeyButton Text="Q"/>
+                <keyBoard1:KeyButton Text="W"/>
+                <keyBoard1:KeyButton Text="E"/>
+                <keyBoard1:KeyButton Text="R"/>
+                <keyBoard1:KeyButton Text="T"/>
+                <keyBoard1:KeyButton Text="Y"/>
+                <keyBoard1:KeyButton Text="U"/>
+                <keyBoard1:KeyButton Text="I"/>
+                <keyBoard1:KeyButton Text="O"/>
+                <keyBoard1:KeyButton Text="P"/>
+                <keyBoard1:CharacterButton Text1="{}{" Text2="["/>
+                <keyBoard1:CharacterButton Text1="}" Text2="]"/>
+                <keyBoard1:CharacterButton Text1="|" Text2="\" Width="73"/>
+                <keyBoard1:StyleButton Margin="1,0,0,0" Width="96"  Height="50" Text1="大写" Text2="小写"/>
+                <keyBoard1:KeyButton Text="A"/>
+                <keyBoard1:KeyButton Text="S"/>
+                <keyBoard1:KeyButton Text="D"/>
+                <keyBoard1:KeyButton Text="F"/>
+                <keyBoard1:KeyButton Text="G"/>
+                <keyBoard1:KeyButton Text="H"/>
+                <keyBoard1:KeyButton Text="J"/>
+                <keyBoard1:KeyButton Text="K"/>
+                <keyBoard1:KeyButton Text="L"/>
+                <keyBoard1:CharacterButton Text1=":" Text2=";"/>
+                <keyBoard1:CharacterButton Text1="&quot;" Text2="'"/>
+                <keyBoard1:KeyButton Text="Enter" Width="109"/>
+                <keyBoard1:StyleButton Margin="1,0,0,0" Width="127"  Height="50" Text1="数字" Text2="字符"/>
+                <keyBoard1:KeyButton Text="Z"/>
+                <keyBoard1:KeyButton Text="X"/>
+                <keyBoard1:KeyButton Text="C"/>
+                <keyBoard1:KeyButton Text="V"/>
+                <keyBoard1:KeyButton Text="B"/>
+                <keyBoard1:KeyButton Text="N"/>
+                <keyBoard1:KeyButton Text="M"/>
+                <keyBoard1:CharacterButton Text1="&lt;" Text2=","/>
+                <keyBoard1:CharacterButton Text1="&gt;" Text2="."/>
+                <keyBoard1:CharacterButton Text1="?" Text2="/"/>
+                <keyBoard1:KeyButton Width="130" Text="空格"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
